@@ -33,7 +33,6 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-    
     if @user.update(user_params)
       flash[:success] = 'プロフィールを更新しました。'
       redirect_to @user
@@ -41,7 +40,13 @@ class UsersController < ApplicationController
       flash[:danger] = 'プロフィールの更新に失敗しました。'
       render :edit
     end
-    
+  end
+  
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:success] = '退会しました。'
+    redirect_to root_url
   end
   
   private
