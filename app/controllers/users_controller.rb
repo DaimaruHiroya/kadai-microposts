@@ -30,11 +30,11 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
   end
   
   def update
-    @user = User.find(params[:id])
+    @user = current_user
     if @user.update(user_params)
       flash[:success] = 'プロフィールを更新しました。'
       redirect_to @user
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user = User.find(params[:id])
+    @user = current_user
     @user.destroy
     flash[:success] = '退会しました。'
     redirect_to root_url
