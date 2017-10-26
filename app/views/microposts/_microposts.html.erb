@@ -2,7 +2,7 @@
   
 <% microposts.each do |micropost| %>
 
-<% user = micropost.user %>
+  <% user = micropost.user %>
    
     <li class="media">
       <div class="media-left">
@@ -10,20 +10,16 @@
       </div>
       <div class="media-body">
         <div>
-          
-<%= link_to user.name, user_path(user) %> <span class="text-muted">posted at <%= micropost.created_at %></span>
+          <%= link_to user.name, user_path(user) %> <span class="text-muted">posted at <%= micropost.created_at %></span>
         </div>
         <div>
           <p><%= micropost.content %></p>
         </div>
         <div>
-          
-<% if current_user == micropost.user %>
-
-<%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
-
-<% end %>
-          
+          <% if current_user == micropost.user %>
+            <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+          <% end %>
+          <%= render 'favorites/favorite_button', favpost: micropost %>
         </div>
       </div>
     </li>
